@@ -4,9 +4,9 @@ info:
   contact: {}
   version: "1.0"
 servers:
-  - url: https://jobs-api-08-06-02.herokuapp.com/api/v1
+  - url: https://cod-pleat.cyclic.app/api/v1
     variables: {}
-  - url: https://jobs-api-08-06-02.herokuapp.com/api/v1
+  - url: https://cod-pleat.cyclic.app/api/v1
     variables: {}
 paths:
   /auth/register:
@@ -34,7 +34,7 @@ paths:
       deprecated: false
       security: []
       servers:
-        - url: https://jobs-api-08-06-02.herokuapp.com/api/v1
+        - url: https://cod-pleat.cyclic.app/api/v1
           variables: {}
   /auth/login:
     post:
@@ -60,7 +60,7 @@ paths:
       deprecated: false
       security: []
       servers:
-        - url: https://jobs-api-08-06-02.herokuapp.com/api/v1
+        - url: https://cod-pleat.cyclic.app/api/v1
           variables: {}
   /jobs:
     post:
@@ -87,7 +87,7 @@ paths:
       security:
         - bearer: []
       servers:
-        - url: https://jobs-api-08-06-02.herokuapp.com/api/v1
+        - url: https://cod-pleat.cyclic.app/api/v1
           variables: {}
     get:
       tags:
@@ -103,7 +103,7 @@ paths:
       security:
         - bearer: []
       servers:
-        - url: https://jobs-api-08-06-02.herokuapp.com/api/v1
+        - url: https://cod-pleat.cyclic.app/api/v1
           variables: {}
   /jobs/{id}:
     parameters:
@@ -127,7 +127,7 @@ paths:
       security:
         - bearer: []
       servers:
-        - url: https://jobs-api-08-06-02.herokuapp.com/api/v1
+        - url: https://cod-pleat.cyclic.app/api/v1
           variables: {}
     patch:
       tags:
@@ -153,7 +153,7 @@ paths:
       security:
         - bearer: []
       servers:
-        - url: https://jobs-api-08-06-02.herokuapp.com/api/v1
+        - url: https://cod-pleat.cyclic.app/api/v1
           variables: {}
     delete:
       tags:
@@ -169,7 +169,7 @@ paths:
       security:
         - bearer: []
       servers:
-        - url: https://jobs-api-08-06-02.herokuapp.com/api/v1
+        - url: https://cod-pleat.cyclic.app/api/v1
           variables: {}
 components:
   schemas:
