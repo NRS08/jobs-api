@@ -1,0 +1,57 @@
+require("dotenv").config();
+require("express-async-errors");
+const connectDB = require("./db/connect");
+const express = require("express");
+const app = express();
+const helmet = require("helmet");
+const cors = require("cors");
+const xss = require("xss-clean");
+const rateLimiter = require("express-rate-limit");
+const swaggerUI = require("swagger-ui-express");
+const YAML = require("yamljs");
+const swaggerDocument = YAML.load("./swagger.yaml");
+
+// error handler
+const notFoundMiddleware = require("./middleware/not-found");
+const errorHandlerMiddleware = require("./middleware/error-handler");
+const authRoute = require("./routes/auth");
+const jobsRoute = require("./routes/jobs");
+const authenticate = require("./middleware/authentication");
+
+app.use(express.json());
+// extra packages
+app.set("trust proxy", 1);
+app.use(
+  rateLimiter({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100,
+  })
+);
+app.use(helmet());
+app.use(cors());
+app.use(xss());
+// routes
+app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/jobs", authenticate, jobsRoute);
+app.get("/", (req, res) => {
+  res.send(`<h1>Jobs Api</h1><a href="/api-docs">Documentation</a>`);
+});
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+
+app.use(notFoundMiddleware);
+app.use(errorHandlerMiddleware);
+
+const port = process.env.PORT || 3000;
+
+const start = async () => {
+  try {
+    await connectDB(process.env.MONGO_URI);
+    app.listen(port, () =>
+      console.log(`Server is listening on port ${port}...`)
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+start();
